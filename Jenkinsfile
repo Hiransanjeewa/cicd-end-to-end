@@ -10,7 +10,7 @@ pipeline {
         
         stage('Checkout'){
            steps {
-                git credentialsId: "${credentialsId}",
+                git credentialsId: credentials('credentialsId'),
                 url: 'https://github.com/Hiransanjeewa/cicd-end-to-end',
                 branch: 'main'
            }
@@ -40,7 +40,7 @@ pipeline {
         
         stage('Checkout K8S manifest SCM'){
             steps {
-                git credentialsId: "${credentialsId}",
+                git credentialsId: credentials('credentialsId'),
                 url: 'https://github.com/Hiransanjeewa/Audiohub-Kubernetes-manifest.git',
                 branch: 'main'
             }
@@ -49,7 +49,7 @@ pipeline {
         stage('Update K8S manifest & push to Repo'){
             steps {
                 script{
-                    withCredentials([usernamePassword(credentialsId:  "${credentialsId}", passwordVariable: "${GIT_PASSWORD}", usernameVariable: "${GIT_USERNAME}")]) {
+                    withCredentials([usernamePassword(credentialsId:  credentials('credentialsId'), passwordVariable: credentials('GIT_PASSWORD'), usernameVariable: credentials('GIT_USERNAME'))]) {
                         sh '''
                         cat deploy.yaml
                         sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
