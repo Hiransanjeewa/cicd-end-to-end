@@ -62,11 +62,9 @@ pipeline {
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                           # Configure Git to use the credential helper with the fetched GitHub token
-                        git config credential.helper '!f() { echo "username=${GIT_USERNAME}"; echo "password=${GITHUB_TOKEN}"; }; f'
+                        git push https://${Github_TOKEN}@github.com/Hiransanjeewa/Audiohub-Kubernetes-manifest.git HEAD:main
                         
-                        # Push without including credentials in the URL
-                        git push origin main
+
 
 
                         '''                        
