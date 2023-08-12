@@ -63,7 +63,7 @@ pipeline {
                         git remote -v
                        
                         
-                         git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hiransanjeewa/cicd-end-to-end.git HEAD:main
+                         git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hiransanjeewa/Audiohub-Kubernetes-manifest HEAD:main
 
 
                         '''                        
