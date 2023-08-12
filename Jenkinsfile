@@ -52,7 +52,13 @@ pipeline {
                         ls
                         pwd
                         realpath deploy.yaml
-                        sed -i '' '19s|.*|image: hiransanjeewa/django:${BUILD_NUMBER}|' deploy.yaml
+                        def filePath = '/var/lib/jenkins/workspace/Github-CI-CD/deploy.yaml' // Update with the correct path
+                        def lineNumber = 19
+                        def newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
+                    
+                        def lines = readFile(filePath).readLines()
+                        lines[lineNumber - 1] = newLine
+                        writeFile file: filePath, text: lines.join('\n')                   
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
