@@ -4,7 +4,8 @@ pipeline {
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_HUB_CREDENTIALS = 'Dockerhub-Credentials'
-        RELATIVE_FILE_PATH = "deploy.yaml"
+     
+        Github-Token="Github-Token"
     }
 
     stages {
@@ -61,7 +62,7 @@ pipeline {
                         git remote -v
                        
 
-                        git push https://hiransanjeewa:'Github-Token'@github.com/Hiransanjeewa/cicd-end-to-end.git HEAD:main
+                        git push https://hiransanjeewa:${Github-Token}@github.com/Hiransanjeewa/cicd-end-to-end.git HEAD:main
 
 
                         '''                        
