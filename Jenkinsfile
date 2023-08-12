@@ -5,7 +5,7 @@ pipeline {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_HUB_CREDENTIALS = 'Dockerhub-Credentials'
      GIT_USERNAME = 'GIT_USERNAME'
-        GIT_TOKEN = 'Github-Token'
+     //   GIT_TOKEN = 'Github-Token'
         GIT_PASSWORD= 'GIT_PASSWORD'
     }
 
