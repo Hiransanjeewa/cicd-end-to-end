@@ -53,12 +53,8 @@ pipeline {
                         ls
                         pwd
                         chmod +rwx deploy.yaml
-                       env.WORKSPACE = pwd()
-                       File file = new File("${env.WORKSPACE}/deploy.yml");
-                       
-                   
-                      
-                        filePath = "deploy.yaml"
+                        sed -i -e "s/django:1/django:2/g" deploy.yaml
+
                     
                                   
                         cat deploy.yaml
