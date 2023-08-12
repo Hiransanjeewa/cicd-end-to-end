@@ -51,7 +51,7 @@ pipeline {
                         cat deploy.yaml
                         ls
                         pwd
-                        readlink deploy.yaml
+                        realpath deploy.yaml
                         sed -i '' 's/1/${BUILD_NUMBER}/g' deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
