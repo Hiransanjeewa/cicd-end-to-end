@@ -58,10 +58,11 @@ pipeline {
                         sed -i -e "s/django:1/django:2/g" deploy.yaml
                                   
                         cat deploy.yaml
+                        git status
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                        git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GIT_USERNAME}/Audiohub-Kubernetes-manifest.git
+                        git remote set-url origin https://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@github.com/hiransanjeewa/Audiohub-Kubernetes-manifest.git
                         git push origin main
 
 
