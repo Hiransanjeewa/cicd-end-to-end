@@ -54,7 +54,7 @@ pipeline {
                         realpath deploy.yaml
                         sed -i '' 's|image: hiransanjeewa/django:1|image: hiransanjeewa/django:${BUILD_NUMBER}|g' deploy.yaml
                         cat deploy.yaml
-                        git add deloy.yaml
+                        git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
                         git push https://github.com/Hiransanjeewa/cicd-end-to-end HEAD:main
