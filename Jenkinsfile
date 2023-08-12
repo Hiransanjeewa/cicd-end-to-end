@@ -4,8 +4,9 @@ pipeline {
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_HUB_CREDENTIALS = 'Dockerhub-Credentials'
-     
+     GIT_USERNAME = 'GIT_USERNAME'
         GIT_TOKEN = 'Github-Token'
+        GIT_PASSWORD= 'GIT_PASSWORD'
     }
 
     stages {
@@ -61,8 +62,8 @@ pipeline {
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
                        
-                        git push origin main
-                        git push https://${GIT_TOKEN}@github.com/hiransanjeewa/cicd-end-to-end.git HEAD:main
+                        
+                         git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hiransanjeewa/cicd-end-to-end.git HEAD:main
 
 
                         '''                        
