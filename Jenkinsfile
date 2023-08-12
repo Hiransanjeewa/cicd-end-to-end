@@ -56,7 +56,7 @@ pipeline {
                         realpath deploy.yaml
                    
                         env.WORKSPACE = pwd()
-                        filePath = readFile "${env.WORKSPACE}/deploy.yaml"
+                        filePath = readFile ("${env.WORKSPACE}/deploy.yaml")
                     
                                   
                         cat deploy.yaml
