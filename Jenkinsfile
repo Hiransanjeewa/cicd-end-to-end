@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     echo 'Build Docker Image'
-                    def customImage = docker.build("hiransanjeewa/django:${BUILD_NUMBER}", '.')
+                     customImage = docker.build("hiransanjeewa/django:${BUILD_NUMBER}", '.')
                 }
             }
         }
