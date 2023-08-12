@@ -30,7 +30,6 @@ pipeline {
 
         stage('Push the artifacts'){
            steps{
-            docker credentialsId: 'Github-CI-CD',
                 script{
                     sh '''
                     
