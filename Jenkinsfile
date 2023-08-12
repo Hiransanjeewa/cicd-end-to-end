@@ -52,9 +52,9 @@ pipeline {
                         ls
                         pwd
                         realpath deploy.yaml
-                        sed -i '' 's/1/${BUILD_NUMBER}/g' deploy.yaml
+                        sed -i '' "s/1/${BUILD_NUMBER}/g" deploy.yaml
                         cat deploy.yaml
-                        git add deploy.yaml
+                        git add deloy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
                         git push https://github.com/Hiransanjeewa/cicd-end-to-end HEAD:main
