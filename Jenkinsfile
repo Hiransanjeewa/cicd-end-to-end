@@ -62,7 +62,7 @@ pipeline {
                         git remote -v
                        
 
-                        git push https://hiransanjeewa:${GIT_TOKEN}@github.com/Hiransanjeewa/cicd-end-to-end.git HEAD:main
+                        git push https://${GIT_TOKEN}@github.com/Hiransanjeewa/cicd-end-to-end.git HEAD:main
 
 
                         '''                        
