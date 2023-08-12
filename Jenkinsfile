@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     echo 'Push to Repo'
-                    docker.withRegistry('https://hub.docker.com/repository/docker/hiransanjeewa/django/general', DOCKER_HUB_CREDENTIALS) {
+                    docker.withRegistry('https://hub.docker.com', DOCKER_HUB_CREDENTIALS) {
                         customImage.push()
                     }
                 }
