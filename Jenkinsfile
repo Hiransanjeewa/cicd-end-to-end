@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_HUB_CREDENTIALS = 'Dockerhub-Credentials'
-        RELATIVE_FILE_PATH = "/var/lib/jenkins/workspace/Github-CI-CD@2/deploy.yaml"
+        RELATIVE_FILE_PATH = "deploy.yaml"
     }
 
     stages {
