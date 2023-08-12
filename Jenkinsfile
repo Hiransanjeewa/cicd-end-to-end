@@ -53,13 +53,21 @@ pipeline {
                         pwd
                         chmod +rwx deploy.yaml
                         realpath deploy.yaml
-                        filePath = '/var/lib/jenkins/workspace/Github-CI-CD/deploy.yaml'
-                        lineNumber = 19
-                        newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
-                         
-                        lines = readFile('/var/lib/jenkins/workspace/Github-CI-CD/deploy.yaml').readLines()
-                        lines[lineNumber - 1] = newLine
-                        writeFile file: filePath, text: lines.join('\n')                   
+                         def filePath = "${WORKSPACE}/${RELATIVE_FILE_PATH}"
+                    echo "Reading file: ${filePath}"
+                    
+                    def lineNumber = 19
+                    def newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
+                    
+                    def lines = readFile(filePath).split("\n")
+                    lines.eachWithIndex { line, index ->
+                        if (index == lineNumber - 1) {
+                            lines[index] = newLine
+                        }
+                    }
+                    
+                    writeFile file: filePath, text: lines.join('\n')
+                    echo "Replaced line ${lineNumber} in ${filePath}"                 
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
