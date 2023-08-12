@@ -49,7 +49,7 @@ pipeline {
         stage('Update K8S manifest & push to Repo') {
             steps {
                 script {
-                    withCredentials([usernamePassword( passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId:'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', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         cat deploy.yaml
                         ls
@@ -61,10 +61,9 @@ pipeline {
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                       
-                        git remote set-url origin https://${GIT_PASSWORD}@github.com/${GIT_USERNAME}/Audiohub-Kubernetes-manifest.git
+                          git push https://github.com/iam-veeramalla/cicd-demo-manifests-repo.git HEAD:main
 
-                        git push origin main
+
 
                         '''                        
                     }
@@ -75,7 +74,9 @@ pipeline {
 }
 
 
+                      //  git push origin main
 
+                   //     git remote set-url origin https://${GIT_PASSWORD}@github.com/${GIT_USERNAME}/Audiohub-Kubernetes-manifest.git
 
                  //        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hiransanjeewa/Audiohub-Kubernetes-manifest HEAD:main
 
