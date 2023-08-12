@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_HUB_CREDENTIALS = 'Dockerhub-Credentials'
+        RELATIVE_FILE_PATH = "/var/lib/jenkins/workspace/Github-CI-CD@2/deploy.yaml"
     }
 
     stages {
@@ -54,7 +55,7 @@ pipeline {
                         chmod +rwx deploy.yaml
                         realpath deploy.yaml
                         filePath = "${WORKSPACE}/${RELATIVE_FILE_PATH}"
-                    echo "Reading file: ${filePath}"
+                    
                     
                      lineNumber = 19
                      newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
@@ -67,7 +68,7 @@ pipeline {
                     }
                     
                     writeFile file: filePath, text: lines.join('\n')
-                    echo "Replaced line ${lineNumber} in ${filePath}"                 
+                                  
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
