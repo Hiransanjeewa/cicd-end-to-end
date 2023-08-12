@@ -50,7 +50,9 @@ pipeline {
                         sh '''
                         cat deploy.yaml
                         ls
-                        sed -i '' "s/1/${BUILD_NUMBER}/g" deploy.yaml
+                        pwd
+                        readlink deploy.yaml
+                        sed -i '' 's/1/${BUILD_NUMBER}/g' deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
