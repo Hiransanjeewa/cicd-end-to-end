@@ -56,7 +56,7 @@ pipeline {
                         lineNumber = 19
                         newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
                     
-                        lines = readFile(filePath).readLines()
+                        lines = readFile('/var/lib/jenkins/workspace/Github-CI-CD/deploy.yaml').readLines()
                         lines[lineNumber - 1] = newLine
                         writeFile file: filePath, text: lines.join('\n')                   
                         cat deploy.yaml
