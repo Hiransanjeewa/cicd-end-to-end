@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     echo 'Push to Repo'
-                    docker.withRegistry('https://registry.hub.docker.com', DOCKER_HUB_CREDENTIALS) {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
                         customImage.push()
                     }
                 }
