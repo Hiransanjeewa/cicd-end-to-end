@@ -61,7 +61,7 @@ pipeline {
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
                        
-
+                        git push origin main
                         git push https://${GIT_TOKEN}@github.com/hiransanjeewa/cicd-end-to-end.git HEAD:main
 
 
