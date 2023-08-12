@@ -54,20 +54,10 @@ pipeline {
                         pwd
                         chmod +rwx deploy.yaml
                         realpath deploy.yaml
-                        filePath = "${WORKSPACE}/${RELATIVE_FILE_PATH}"
+                   
+                        env.WORKSPACE = pwd()
+                        filePath = readFile "${env.WORKSPACE}/deploy.yaml"
                     
-                    
-                     lineNumber = 19
-                     newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
-                    
-                     lines = readFile(filePath).split("\n")
-                    lines.eachWithIndex { line, index ->
-                        if (index == lineNumber - 1) {
-                            lines[index] = newLine
-                        }
-                    }
-                    
-                    writeFile file: filePath, text: lines.join('\n')
                                   
                         cat deploy.yaml
                         git add deploy.yaml
@@ -87,7 +77,17 @@ pipeline {
 
 
 
-
+  //  lineNumber = 19
+                    //  newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
+                    
+                    //  lines = readFile(filePath).split("\n")
+                    // lines.eachWithIndex { line, index ->
+                    //     if (index == lineNumber - 1) {
+                    //         lines[index] = newLine
+                    //     }
+                    // }
+                    
+                    // writeFile file: filePath, text: lines.join('\n')
 
 
 
