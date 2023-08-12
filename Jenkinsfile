@@ -4,7 +4,7 @@ pipeline {
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
-      
+        DOCKER_HUB_CREDENTIALS = 'Github-CI-CD'
     }
 
     stages {
@@ -34,7 +34,9 @@ pipeline {
                     sh '''
                     
                     echo 'Push to Repo'
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKER_HUB_CREDENTIALS) {
                     docker push hiransanjeewa/django:${BUILD_NUMBER}
+                    }
                     
                    
                     '''
