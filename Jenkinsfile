@@ -22,8 +22,9 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    PATH=\$DOCKER_BIN:\$PATH docker build -t hiransanjeewa/django:7 .
-                    '''
+                    def dockerBinaryPath = "/usr/local/bin"  // Replace with your Docker binary path
+                    sh "PATH=$dockerBinaryPath:\$PATH docker build -t hiransanjeewa/django:7 ."
+                                  '''
                 }
             }
         }
