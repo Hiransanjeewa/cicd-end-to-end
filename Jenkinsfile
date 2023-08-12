@@ -52,7 +52,7 @@ pipeline {
                         ls
                         pwd
                         realpath deploy.yaml
-                        sed -i '' 's|image: hiransanjeewa/django:1|image: hiransanjeewa/django:${BUILD_NUMBER}|g' deploy.yaml
+                        sed -i '' '19s|.*|image: hiransanjeewa/django:${BUILD_NUMBER}|' deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
