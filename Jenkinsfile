@@ -53,13 +53,13 @@ pipeline {
                         pwd
                         chmod +rwx deploy.yaml
                         realpath deploy.yaml
-                         def filePath = "${WORKSPACE}/${RELATIVE_FILE_PATH}"
+                        filePath = "${WORKSPACE}/${RELATIVE_FILE_PATH}"
                     echo "Reading file: ${filePath}"
                     
-                    def lineNumber = 19
-                    def newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
+                     lineNumber = 19
+                     newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
                     
-                    def lines = readFile(filePath).split("\n")
+                     lines = readFile(filePath).split("\n")
                     lines.eachWithIndex { line, index ->
                         if (index == lineNumber - 1) {
                             lines[index] = newLine
