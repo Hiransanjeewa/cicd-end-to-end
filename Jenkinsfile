@@ -4,7 +4,7 @@ pipeline {
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
-         DOCKER_BINARY_PATH = "/usr/local/bin" 
+         DOCKER_BINARY_PATH = "/usr/local/bin/docker" 
     }
     
     stages {
