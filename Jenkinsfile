@@ -34,7 +34,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Push to Repo'
-                    docker push -t hiransanjeewa/django:${BUILD_NUMBER}
+                    docker push hiransanjeewa/django:${BUILD_NUMBER}
                     '''
                 }
             }
