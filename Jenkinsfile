@@ -62,8 +62,8 @@ pipeline {
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
                        
-                        
-                         git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hiransanjeewa/Audiohub-Kubernetes-manifest HEAD:main
+                        git remote set-url origin https://${Github-Token}@github.com/${GIT_USERNAME}/Audiohub-Kubernetes-manifest.git
+
 
 
                         '''                        
@@ -77,6 +77,7 @@ pipeline {
 
 
 
+                 //        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hiransanjeewa/Audiohub-Kubernetes-manifest HEAD:main
 
 
   //  lineNumber = 19
