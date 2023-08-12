@@ -22,7 +22,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    docker build -t hiransanjeewa/django:${BUILD_NUMBER} .
+                    def customImage = docker.build("hiransanjeewa/django:${BUILD_NUMBER}", '.')
                     '''
                 }
             }
@@ -34,8 +34,8 @@ pipeline {
                     sh '''
                     
                     echo 'Push to Repo'
-                    docker.withRegistry('https://registry.hub.docker.com', DOCKER_HUB_CREDENTIALS) {
-                    docker push hiransanjeewa/django:${BUILD_NUMBER}
+                     docker.withRegistry('https://registry.hub.docker.com', DOCKER_HUB_CREDENTIALS) {
+                        customImage.push()
                     }
                     
                    
