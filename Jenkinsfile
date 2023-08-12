@@ -5,9 +5,8 @@ pipeline {
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
       
-
     }
-    
+
     stages {
         
         stage('Checkout'){
@@ -31,10 +30,14 @@ pipeline {
 
         stage('Push the artifacts'){
            steps{
+            docker credentialsId: 'Github-CI-CD',
                 script{
                     sh '''
+                    
                     echo 'Push to Repo'
                     docker push hiransanjeewa/django:${BUILD_NUMBER}
+                    
+                   
                     '''
                 }
             }
