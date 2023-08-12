@@ -52,11 +52,11 @@ pipeline {
                         ls
                         pwd
                         realpath deploy.yaml
-                        def filePath = '/var/lib/jenkins/workspace/Github-CI-CD/deploy.yaml' // Update with the correct path
-                        def lineNumber = 19
-                        def newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
+                        filePath = '/var/lib/jenkins/workspace/Github-CI-CD/deploy.yaml' // Update with the correct path
+                        lineNumber = 19
+                        newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
                     
-                        def lines = readFile(filePath).readLines()
+                        lines = readFile(filePath).readLines()
                         lines[lineNumber - 1] = newLine
                         writeFile file: filePath, text: lines.join('\n')                   
                         cat deploy.yaml
