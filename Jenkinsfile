@@ -5,7 +5,7 @@ pipeline {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_HUB_CREDENTIALS = 'Dockerhub-Credentials'
      
-        Github-Token="Github-Token"
+        GIT_TOKEN = 'Github-Token'
     }
 
     stages {
@@ -62,7 +62,7 @@ pipeline {
                         git remote -v
                        
 
-                        git push https://hiransanjeewa:${Github-Token}@github.com/Hiransanjeewa/cicd-end-to-end.git HEAD:main
+                        git push https://hiransanjeewa:${GIT_TOKEN}@github.com/Hiransanjeewa/cicd-end-to-end.git HEAD:main
 
 
                         '''                        
