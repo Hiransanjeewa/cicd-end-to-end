@@ -52,7 +52,7 @@ pipeline {
                         ls
                         pwd
                         realpath deploy.yaml
-                        filePath = '/var/lib/jenkins/workspace/Github-CI-CD/deploy.yaml' // Update with the correct path
+                        filePath = '/var/lib/jenkins/workspace/Github-CI-CD@2/deploy.yaml'
                         lineNumber = 19
                         newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
                     
