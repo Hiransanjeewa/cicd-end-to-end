@@ -53,10 +53,12 @@ pipeline {
                         ls
                         pwd
                         chmod +rwx deploy.yaml
-                      
+                       env.WORKSPACE = pwd()
+                       File file = new File("${env.WORKSPACE}/deploy.yml");
+                       
                    
                       
-                        filePath = readFile "deploy.yaml"
+                        filePath = "deploy.yaml"
                     
                                   
                         cat deploy.yaml
