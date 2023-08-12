@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     echo 'Build Docker Image'
-                     customImage = docker.build("hiransanjeewa/django:${BUILD_NUMBER}", '.')
+                    customImage = docker.build("hiransanjeewa/django:${BUILD_NUMBER}", '.')
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'Github-Credentials', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         cat deploy.yaml
-                        sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
+                        sed -i '' "s/22/${BUILD_NUMBER}/g" deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
