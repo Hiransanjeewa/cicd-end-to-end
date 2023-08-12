@@ -1,5 +1,4 @@
 pipeline {
-    
     agent any 
     
     environment {
@@ -8,53 +7,45 @@ pipeline {
     }
 
     stages {
-        
-        stage('Checkout'){
-           steps {
+        stage('Checkout') {
+            steps {
                 git credentialsId: 'Github-CI-CD', 
                 url: 'https://github.com/Hiransanjeewa/cicd-end-to-end',
                 branch: 'main'
-           }
+            }
         }
 
-        stage('Build Docker'){
-            steps{
-                script{
-                    sh '''
-                    echo 'Buid Docker Image'
+        stage('Build Docker') {
+            steps {
+                script {
+                    echo 'Build Docker Image'
                     def customImage = docker.build("hiransanjeewa/django:${BUILD_NUMBER}", '.')
-                    '''
                 }
             }
         }
 
-        stage('Push the artifacts'){
-           steps{
-                script{
-                    sh '''
-                    
+        stage('Push the artifacts') {
+            steps {
+                script {
                     echo 'Push to Repo'
-                    docker.withRegistry('https://registry.hub.docker.com', $DOCKER_HUB_CREDENTIALS) {
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKER_HUB_CREDENTIALS) {
                         customImage.push()
                     }
-                    
-                   
-                    '''
                 }
             }
         }
-        
-        stage('Checkout K8S manifest SCM'){
+
+        stage('Checkout K8S manifest SCM') {
             steps {
                 git credentialsId: 'Github-CI-CD', 
                 url: 'https://github.com/Hiransanjeewa/cicd-end-to-end.git',
                 branch: 'main'
             }
         }
-        
-        stage('Update K8S manifest & push to Repo'){
+
+        stage('Update K8S manifest & push to Repo') {
             steps {
-                script{
+                script {
                     withCredentials([usernamePassword(credentialsId: 'Github-CI-CD', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         cat deploy.yaml
@@ -71,15 +62,6 @@ pipeline {
         }
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 
