@@ -64,7 +64,7 @@ pipeline {
                        
                         git remote set-url origin https://${Github-Token}@github.com/${GIT_USERNAME}/Audiohub-Kubernetes-manifest.git
 
-
+                        git push origin main
 
                         '''                        
                     }
