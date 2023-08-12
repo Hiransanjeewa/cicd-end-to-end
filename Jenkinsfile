@@ -4,7 +4,7 @@ pipeline {
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
-       DOCKER_BINARY_PATH = "/usr/local/bin" 
+      
 
     }
     
@@ -23,7 +23,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    PATH=\$DOCKER_BINARY_PATH:\$PATH docker build -t hiransanjeewa/django:7 .
+                    docker build -t hiransanjeewa/django:${BUILD_NUMBER} .
                     '''
                 }
             }
@@ -34,7 +34,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Push to Repo'
-                    PATH=\$DOCKER_BINARY_PATH:\$PATH docker push docker build -t hiransanjeewa/django:${BUILD_NUMBER}
+                    docker push docker build -t hiransanjeewa/django:${BUILD_NUMBER}
                     '''
                 }
             }
