@@ -21,7 +21,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    PATH=\$DOCKER_BIN:\/usr/local/bin/docker docker build -t hiransanjeewa/django:${BUILD_NUMBER} .
+                    PATH=\$DOCKER_BIN:\$PATH docker build -t hiransanjeewa/django:7 .
                     '''
                 }
             }
