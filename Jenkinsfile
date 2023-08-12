@@ -53,10 +53,10 @@ pipeline {
                         ls
                         pwd
                         chmod +rwx deploy.yaml
-                        realpath deploy.yaml
+                      
                    
-                        WORKSPACE = pwd()
-                        filePath = readFile ("${WORKSPACE}/deploy.yaml")
+                      
+                        filePath = readFile "deploy.yaml"
                     
                                   
                         cat deploy.yaml
