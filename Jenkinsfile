@@ -60,7 +60,7 @@ pipeline {
                         ls
                         pwd
                         chmod +rwx deploy.yaml
-                        sed -i -e "s/django:1/django:2/g" deploy.yaml
+                        sed -i -e "s/django:1/django:${BUILD_NUMBER}/g" deploy.yaml
                                   
                         cat deploy.yaml
                         git status
