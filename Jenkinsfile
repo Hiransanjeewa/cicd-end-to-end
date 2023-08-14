@@ -60,7 +60,7 @@ pipeline {
                         ls
                         pwd
                         chmod +rwx deploy.yaml
-                        sed -i '19s/.*/image: hiransanjeewa/django:${BUILD_NUMBER}/' deploy.yaml           
+                        sed -i "19s#.*#image: hiransanjeewa/django:${BUILD_NUMBER}#" deploy.yaml          
                         cat deploy.yaml
                         git status
                         git add deploy.yaml
