@@ -60,8 +60,7 @@ pipeline {
                         ls
                         pwd
                         chmod +rwx deploy.yaml
-                        sed -i -e "s/django:1/django:${BUILD_NUMBER}/g" deploy.yaml
-                                  
+                        sed -i '19s/.*/image: hiransanjeewa/django:${BUILD_NUMBER}/' deploy.yaml           
                         cat deploy.yaml
                         git status
                         git add deploy.yaml
@@ -81,4 +80,5 @@ pipeline {
 }
 
 // Add github token to credentials ID = Github-Token
+//    sed -i -e "s/django:1/django:${BUILD_NUMBER}/g" deploy.yaml
 
