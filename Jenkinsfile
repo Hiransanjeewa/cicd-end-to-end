@@ -62,7 +62,7 @@ pipeline {
                         pwd
                         cd manifests
                         chmod +rwx deploy.yml
-                        sed -i '' "s/django:[0-9]*/django:${BUILD_NUMBER}/g" deploy.yml        
+                        sed -i "s/django:[0-9]*/django:${BUILD_NUMBER}/g" deploy.yml  
                         cat deploy.yml
                         cd ../
                         git status
@@ -82,6 +82,9 @@ pipeline {
         }
     }
 }
+
+
+//    sed -i '' "s/django:[0-9]*/django:${BUILD_NUMBER}/g" deploy.yml        
 
 // Add github token to credentials ID = Github-Token
 //    sed -i -e "s/django:1/django:${BUILD_NUMBER}/g" deploy.yaml
