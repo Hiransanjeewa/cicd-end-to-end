@@ -17,13 +17,19 @@ pipeline {
                 branch: 'main'
             }
         } 
+
         stage('SonarQube analysis') {
-            // requires SonarQube Scanner 2.8+
-            def scannerHome = tool 'sonarqube-scanner';
-            withSonarQubeEnv('sonar') {
-            sh "${scannerHome}/bin/sonarqube-scanner"
+            steps{
+                // requires SonarQube Scanner 2.8+
+                def scannerHome = tool 'sonarqube-scanner';
+                withSonarQubeEnv('sonar') {
+                     sh "${scannerHome}/bin/sonarqube-scanner"
+
+                }
+          
             }
         }
+        
 
         stage('Build Docker') {
             steps {
