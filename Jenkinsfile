@@ -19,7 +19,7 @@ pipeline {
         } 
         stage('SonarQube') {
             steps {
-               withSonarQubeEnv('sonar', path: '/opt/sonar-scanner/bin') {
+               withSonarQubeEnv('sonar') {
                     sh 'sonar-scanner \
                     -Dsonar.projectKey=django_ci-cd \
                     -Dsonar.sources=. \
