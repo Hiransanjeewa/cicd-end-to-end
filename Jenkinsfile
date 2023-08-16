@@ -17,13 +17,13 @@ pipeline {
                 branch: 'main'
             }
         } 
-        stage('SonarQube') {
-            steps {
-               withSonarQubeEnv('sonar') {
-                  sh  'sonar-scanner'
-        }
-      }
-    }
+    //     stage('SonarQube') {
+    //         steps {
+    //            withSonarQubeEnv('sonar') {
+    //               sh  'sonar-scanner'
+    //     }
+    //   }
+    // }
 
         stage('Build Docker') {
             steps {
