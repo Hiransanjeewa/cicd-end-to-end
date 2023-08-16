@@ -18,15 +18,13 @@ pipeline {
             }
         } 
 
+        stage('SCM') {
+            git 'https://github.com/Hiransanjeewa/cicd-end-to-end.git'
+        }
         stage('SonarQube analysis') {
-            steps{
-                // requires SonarQube Scanner 2.8+
-                def scannerHome = tool 'sonar-scanner';
-                withSonarQubeEnv('sonar') {
-                     sh "${scannerHome}/bin/sonar-scanner"
-
-                }
-          
+            def scannerHome = tool 'sonar-scanner';
+            withSonarQubeEnv('sonar') { 
+                sh "${scannerHome}/bin/sonar-scanner"
             }
         }
         
