@@ -16,6 +16,21 @@ pipeline {
                 url: 'https://github.com/Hiransanjeewa/cicd-end-to-end',
                 branch: 'main'
             }
+        } 
+        stage('Static Code Analysis') {
+            environment {
+                SONAR_URL = "http://54.90.50.147:9000" // Replace with your SonarQube server URL
+            }
+            steps {
+                script {
+                    def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    def scannerCmd = "${scannerHome}/bin/sonar-scanner"
+
+                    withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+                    sh "${scannerCmd} -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}"
+                    }
+                }
+            }
         }
 
         stage('Build Docker') {
