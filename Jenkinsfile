@@ -57,17 +57,17 @@ pipeline {
 
                         sh '''
                         
-                        cat deploy.yaml
+                        
                         ls
                         pwd
                         cd manifests
-                        chmod +rwx deploy.yaml
-                        sed -i "19s#.*#image: hiransanjeewa/django:${BUILD_NUMBER}#" deploy.yaml          
-                        cat deploy.yaml
+                        chmod +rwx deploy.yml
+                        sed -i "19s#.*#image: hiransanjeewa/django:${BUILD_NUMBER}#" deploy.yml          
+                        cat deploy.yml
                         cd ../
                         git status
                         git add .
-                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
+                        git commit -m 'Updated the deploy yml | Jenkins Pipeline'
                         git remote -v
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
 
