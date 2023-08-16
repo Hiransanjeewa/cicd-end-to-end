@@ -19,16 +19,10 @@ pipeline {
             }
         } 
 
-        stage('Static Code Analysis') {
-          environment {
-            SONAR_URL = "http://34.172.48.253:9000"
-          }
-          steps {
-            withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-              
-              sh 'sonar-scanner'
-
-            }
+        stage('SonarQube Analysis') {
+          def scannerHome = tool 'sonar-scanner';
+          withSonarQubeEnv() {
+            sh "${scannerHome}/bin/sonar-scanner"
           }
         }
         
