@@ -20,7 +20,11 @@ pipeline {
         stage('SonarQube') {
             steps {
                withSonarQubeEnv('sonar') {
-                  sh  'sonar-scanner'
+                    sh 'sonar-scanner \
+                    -Dsonar.projectKey=django_ci-cd \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=http://34.27.30.176:9000 \
+                    -Dsonar.login=3ac7accfa5d723b5d3fae16342bf547604e4d5c5'
                }
             }
         }
