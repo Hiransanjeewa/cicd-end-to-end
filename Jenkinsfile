@@ -62,7 +62,7 @@ pipeline {
                         pwd
                         cd manifests
                         chmod +rwx deploy.yml
-                        sed -i "19s#.*#image: hiransanjeewa/django:${BUILD_NUMBER}#" deploy.yml          
+                        sed -i "s/django:[0-9]*/django:${BUILD_NUMBER}#" deploy.yml          
                         cat deploy.yml
                         cd ../
                         git status
