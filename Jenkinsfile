@@ -20,14 +20,17 @@ pipeline {
         } 
 
         stage('SonarQube Analysis') {
-          steps{
-            def scannerHome = tool 'sonar-scanner';
-            withSonarQubeEnv() {
-              sh "${scannerHome}/bin/sonar-scanner"
-            }
+          environment {
+            scannerHome = tool name: 'sonar-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
           }
-          
+            steps {
+              script {
+                def scannerCmd = "${scannerHome}/bin/sonar-scanner"
+                sh "${scannerCmd}"
+              }
+            }
         }
+
         
 
         stage('Build Docker') {
