@@ -52,15 +52,16 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'Github-Credentials', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
                         sh '''
+                        cd deploy
                         cat deploy.yaml
                         ls
                         pwd
                         chmod +rwx deploy.yaml
                         sed -i -e "s/django:1/django:2/g" deploy.yaml
-                                  
                         cat deploy.yaml
+                        cd ../
                         git status
-                        git add deploy.yaml
+                        git add .
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
                         git push -u origin main                        
