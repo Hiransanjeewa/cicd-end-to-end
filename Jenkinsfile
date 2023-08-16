@@ -60,7 +60,7 @@ pipeline {
                         cat deploy.yaml
                         ls
                         pwd
-                        cd deploy
+                        cd manifests
                         chmod +rwx deploy.yaml
                         sed -i "19s#.*#image: hiransanjeewa/django:${BUILD_NUMBER}#" deploy.yaml          
                         cat deploy.yaml
