@@ -18,9 +18,9 @@ pipeline {
             }
         } 
 
-        stage('SCM') {
-            git 'https://github.com/Hiransanjeewa/cicd-end-to-end.git'
-        }
+        // stage('SCM') {
+        //     git 'https://github.com/Hiransanjeewa/cicd-end-to-end.git'
+        // }
         stage('SonarQube analysis') {
             def scannerHome = tool 'sonar-scanner';
             withSonarQubeEnv('sonar') { 
