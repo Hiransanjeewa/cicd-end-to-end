@@ -41,15 +41,19 @@ pipeline {
         stage('Checkout K8S manifest SCM') {
             steps {
                 git credentialsId: 'Github-Credentials', 
-                url: 'https://github.com/Hiransanjeewa/Audiohub-Kubernetes-manifest',
+                url: 'https://github.com/Hiransanjeewa/Audiohub-Kubernetes-manifest.git',
                 branch: 'main'
             }
         }
 
         stage('Update K8S manifest & push to Repo') {
+            environment {
+                GIT_REPO_NAME = "Audiohub-Kubernetes-manifest"
+                GIT_USER_NAME = "Hiransanjeewa"
+            }
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'Github-Credentials', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([string(credentialsId: 'Github-Token', variable: 'GITHUB_TOKEN')]) {
 
                         sh '''
                         cd deploy
@@ -57,14 +61,15 @@ pipeline {
                         ls
                         pwd
                         chmod +rwx deploy.yaml
-                        sed -i -e "s/django:1/django:2/g" deploy.yaml
+                        sed -i "19s#.*#image: hiransanjeewa/django:${BUILD_NUMBER}#" deploy.yaml          
                         cat deploy.yaml
                         cd ../
                         git status
                         git add .
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                        git push -u origin main                        
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+
 
 
 
@@ -76,100 +81,6 @@ pipeline {
     }
 }
 
+// Add github token to credentials ID = Github-Token
+//    sed -i -e "s/django:1/django:${BUILD_NUMBER}/g" deploy.yaml
 
-                      //  git push origin main
-
-                   //     git remote set-url origin https://${GIT_PASSWORD}@github.com/${GIT_USERNAME}/Audiohub-Kubernetes-manifest.git
-
-                 //        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hiransanjeewa/Audiohub-Kubernetes-manifest HEAD:main
-
-
-  //  lineNumber = 19
-                    //  newLine = "image: hiransanjeewa/django:${BUILD_NUMBER}"
-                    
-                    //  lines = readFile(filePath).split("\n")
-                    // lines.eachWithIndex { line, index ->
-                    //     if (index == lineNumber - 1) {
-                    //         lines[index] = newLine
-                    //     }
-                    // }
-                    
-                    // writeFile file: filePath, text: lines.join('\n')
-
-
-
-
-
-
-
-
-
-// pipeline {
-    
-//     agent any 
-    
-//     environment {
-//         IMAGE_TAG = "${BUILD_NUMBER}"
-//          DOCKER_BINARY_PATH = "/usr/local/bin/" 
-//     }
-    
-//     stages {
-        
-//         stage('Checkout'){
-//            steps {
-//                 git credentialsId: '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',
-//                 url: 'https://github.com/Hiransanjeewa/cicd-end-to-end',
-//                 branch: 'main'
-//            }
-//         }
-
-
-//         stage('Build Docker'){
-//             steps{
-//                 script{
-//                     sh '''
-//                     echo 'Buid Docker Image'
-//                     PATH=\$DOCKER_BINARY_PATH:\$PATH docker build -t hiransanjeewa/django:7 .
-//                                   '''
-//                 }
-//             }
-//         }
-
-//         stage('Push the artifacts'){
-//            steps{
-//                 script{
-//                     sh '''
-//                     echo 'Push to Repo'
-//                     docker push hiransanjeewa/django:${BUILD_NUMBER}
-//                     '''
-//                 }
-//             }
-//         }
-        
-//         stage('Checkout K8S manifest SCM'){
-//             steps {
-//                 git credentialsId: "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",
-//                 url: 'https://github.com/Hiransanjeewa/Audiohub-Kubernetes-manifest.git',
-//                 branch: 'main'
-//             }
-//         }
-        
-//         stage('Update K8S manifest & push to Repo'){
-//             steps {
-//                 script{
-//                     withCredentials([usernamePassword(credentialsId:  "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", passwordVariable: ' ', usernameVariable: ' ')]) {
-//                         sh '''
-//                         cat deploy.yaml
-//                         sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
-//                         cat deploy.yaml
-//                         git add deploy.yaml
-//                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-//                         git remote -v
-//                         git push https://github.com/Hiransanjeewa/Audiohub-Kubernetes-manifest.git HEAD:main
-//                         '''                        
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
