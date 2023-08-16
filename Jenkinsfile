@@ -17,6 +17,21 @@ pipeline {
                 branch: 'main'
             }
         } 
+        stage('Static Code Analysis') {
+            environment {
+                SONAR_URL = "http://54.90.50.147:9000" // Replace with your SonarQube server URL
+            }
+            steps {
+                script {
+                    def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    def scannerCmd = "${scannerHome}/bin/sonar-scanner"
+
+                    withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+                    sh "${scannerCmd} -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}"
+                    }
+                }
+            }
+        }
 
         stage('Build Docker') {
             steps {
@@ -89,18 +104,4 @@ pipeline {
 //    sed -i -e "s/django:1/django:${BUILD_NUMBER}/g" deploy.yaml
 
 
-        // stage('Static Code Analysis') {
-        //     environment {
-        //         SONAR_URL = "http://54.90.50.147:9000" // Replace with your SonarQube server URL
-        //     }
-        //     steps {
-        //         script {
-        //             def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-        //             def scannerCmd = "${scannerHome}/bin/sonar-scanner"
-
-        //             withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-        //             sh "${scannerCmd} -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}"
-        //             }
-        //         }
-        //     }
-        // }
+   
