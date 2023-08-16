@@ -7,6 +7,7 @@ pipeline {
      GIT_USERNAME = 'GIT_USERNAME'
      //   GIT_TOKEN = 'Github-Token'
         GIT_PASSWORD= 'GIT_PASSWORD'
+        SONAR_SERVER= 'sonar-scanner'
     }
 
     stages {
@@ -22,9 +23,8 @@ pipeline {
         //     git 'https://github.com/Hiransanjeewa/cicd-end-to-end.git'
         // }
         stage('SonarQube analysis') {
-            def scannerHome = tool 'sonar-scanner';
             withSonarQubeEnv('sonar') { 
-                sh "${scannerHome}/bin/sonar-scanner"
+                sh "${SONAR_SERVER}/bin/sonar-scanner"
             }
         }
         
