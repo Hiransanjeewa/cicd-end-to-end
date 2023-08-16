@@ -23,9 +23,13 @@ pipeline {
         //     git 'https://github.com/Hiransanjeewa/cicd-end-to-end.git'
         // }
         stage('SonarQube analysis') {
-            withSonarQubeEnv('sonar') { 
-                sh "${SONAR_SERVER}/bin/sonar-scanner"
+            steps{
+                withSonarQubeEnv('sonar') { 
+                   sh "${SONAR_SERVER}/bin/sonar-scanner"
+                }
+
             }
+            
         }
         
 
