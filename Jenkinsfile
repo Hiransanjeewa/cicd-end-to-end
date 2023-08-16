@@ -56,10 +56,11 @@ pipeline {
                     withCredentials([string(credentialsId: 'Github-Token', variable: 'GITHUB_TOKEN')]) {
 
                         sh '''
-                        cd deploy
+                        
                         cat deploy.yaml
                         ls
                         pwd
+                        cd deploy
                         chmod +rwx deploy.yaml
                         sed -i "19s#.*#image: hiransanjeewa/django:${BUILD_NUMBER}#" deploy.yaml          
                         cat deploy.yaml
