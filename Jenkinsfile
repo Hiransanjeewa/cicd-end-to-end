@@ -7,6 +7,7 @@ pipeline {
      GIT_USERNAME = 'GIT_USERNAME'
      //   GIT_TOKEN = 'Github-Token'
         GIT_PASSWORD= 'GIT_PASSWORD'
+        SONARQUBE_TOKEN = 'sonarqube'
     }
 
     stages {
@@ -20,9 +21,11 @@ pipeline {
         stage('SonarQube') {
             steps {
                 withSonarQubeEnv('sonar') {
-                sh 'python manage.py clean'
-                sh 'python manage.py build'
-                sh 'sonar-scanner'
+                  sh """
+                  ${scannerHome}/bin/sonar-scanner \
+                  -Dsonar.projectKey=${SONARQUBE_TOKEN} \
+                  -Dsonar.sources=. \
+                  """
                 }
              }
         }
