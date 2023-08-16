@@ -25,8 +25,8 @@ pipeline {
           }
           steps {
             withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-              sh 'sonar-scanner'
-            //   sh 'docker run -e SONAR_HOST_URL=${SONAR_URL} -e SONAR_TOKEN=$SONAR_AUTH_TOKEN -v $PWD:/code -w /code python:3.8 sonar-scanner'
+              
+              sh 'sonar-scanner -e SONAR_HOST_URL=${SONAR_URL} -e SONAR_TOKEN=$SONAR_AUTH_TOKEN -v $PWD:/code -w /code'
 
             }
           }
