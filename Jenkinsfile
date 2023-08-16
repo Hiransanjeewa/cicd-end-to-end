@@ -19,10 +19,12 @@ pipeline {
         } 
         stage('SonarQube') {
             steps {
-               withSonarQubeEnv('sonar') {
-                  sh  'sonar-scanner'
-        }
-            }
+                withSonarQubeEnv('sonar') {
+                sh 'python manage.py clean'
+                sh 'python manage.py build'
+                sh 'sonar-scanner'
+                }
+             }
         }
 
         stage('Build Docker') {
