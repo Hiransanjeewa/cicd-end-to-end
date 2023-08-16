@@ -19,17 +19,15 @@ pipeline {
             }
         } 
 
-        // stage('SCM') {
-        //     git 'https://github.com/Hiransanjeewa/cicd-end-to-end.git'
-        // }
-        stage('SonarQube analysis') {
-            steps{
-                withSonarQubeEnv('sonar') { 
-                   sh "${SONAR_SERVER}/bin/sonar-scanner"
-                }
-
+        stage('Static Code Analysis') {
+          environment {
+            SONAR_URL = "http://34.201.116.83:9000"
+          }
+          steps {
+            withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+              sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
             }
-            
+          }
         }
         
 
