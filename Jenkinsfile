@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent any 
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
@@ -19,13 +19,20 @@ pipeline {
             }
         } 
 
-        // stage('SonarQube Scan') {
-        //     steps {
-        //         sh 'sonar-scanner'
-        //     }
-        // }
+        stage('SonarQube Analysis') {
+          environment {
+            scannerHome = tool name: 'sonar-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+          }
+            steps {
+              script {
+                def scannerCmd = "${scannerHome}/bin/sonar-scanner"
+                sh "${scannerCmd}"
+              }
+            }
+        }
 
         
+
         stage('Build Docker') {
             steps {
                 script {
@@ -90,11 +97,3 @@ pipeline {
         }
     }
 }
-
-
-
-// Add github token to credentials ID = Github-Token
-//    sed -i -e "s/django:1/django:${BUILD_NUMBER}/g" deploy.yaml
-
-
-   
