@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'mattheusxs/python_sonar'
+            image 'alcuma/python_sonar'
         }
     }
     
