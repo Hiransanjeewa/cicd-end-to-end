@@ -7,7 +7,6 @@ pipeline {
      GIT_USERNAME = 'GIT_USERNAME'
      //   GIT_TOKEN = 'Github-Token'
         GIT_PASSWORD= 'GIT_PASSWORD'
-        SONAR_SERVER= 'sonar-scanner'
     }
 
     stages {
@@ -17,8 +16,7 @@ pipeline {
                 url: 'https://github.com/Hiransanjeewa/cicd-end-to-end',
                 branch: 'main'
             }
-        } 
-
+        }
 
         stage('Build Docker') {
             steps {
@@ -42,7 +40,7 @@ pipeline {
 
         stage('Checkout K8S manifest SCM') {
             steps {
-                git credentialsId: 'Github-Token', 
+                git credentialsId: 'Github-Credentials', 
                 url: 'https://github.com/Hiransanjeewa/Audiohub-Kubernetes-manifest.git',
                 branch: 'main'
             }
@@ -84,3 +82,4 @@ pipeline {
         }
     }
 }
+
