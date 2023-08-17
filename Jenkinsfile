@@ -9,6 +9,7 @@ pipeline {
         GIT_PASSWORD= 'GIT_PASSWORD'
                  YOUR_PROJECT_KEY   ='jenkins'
                  SONARQUBE_URL= '34.170.25.117:9000'
+                 YOUR_REPO='Django'
     }
 
     stages {
