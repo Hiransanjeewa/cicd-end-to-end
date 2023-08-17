@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'pradeepv30/jenkins-sonar-scanner'
+            image 'elenag/jenkins-django-integration'
         }
     }
     
