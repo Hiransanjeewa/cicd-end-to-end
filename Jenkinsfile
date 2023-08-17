@@ -9,7 +9,7 @@ pipeline {
         GIT_PASSWORD= 'GIT_PASSWORD'
                  YOUR_PROJECT_KEY   ='jenkins'
                  SONARQUBE_URL= '34.170.25.117:9000'
-                 YOUR_REPO='Django'
+                 
     }
 
     stages {
@@ -27,7 +27,7 @@ pipeline {
                    -e SONAR_HOST_URL="http://${SONARQUBE_URL}" \
                    -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=${YOUR_PROJECT_KEY}" \
                    -e SONAR_TOKEN="b2adbb7019904d404959714bc3e86f6a51a4700f" \
-                   -v "${YOUR_REPO}:/" \
+                   -v "${YOUR_REPO}: " \
                    sonarsource/sonar-scanner-cli'
             }
         }
