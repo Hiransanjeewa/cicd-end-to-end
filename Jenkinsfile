@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'alcuma/python_sonar'
+            image 'ntruiz/python-sonar-scanner'
         }
     }
     
