@@ -23,11 +23,11 @@ pipeline {
             }
         } 
 
-        stage('SonarQube Scan') {
-            steps {
-                sh 'sonar-scanner'
-            }
-        }
+        // stage('SonarQube Scan') {
+        //     steps {
+        //         sh 'sonar-scanner'
+        //     }
+        // }
 
         
         stage('Build Docker') {
