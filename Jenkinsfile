@@ -1,5 +1,9 @@
 pipeline {
-    agent any 
+    agent {
+        docker {
+            image 'younesehb/django-sonar'
+        }
+    }
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
