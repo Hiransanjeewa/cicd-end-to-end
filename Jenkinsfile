@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'elenag/jenkins-django-integration'
-        }
-    }
+    agent any
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
@@ -21,7 +17,18 @@ pipeline {
                 branch: 'main'
             }
         }
-
+        stage('SonarQube analysis') {
+            steps {
+                sh ' docker run \
+                   --rm \
+                   -e SONAR_HOST_URL="http://${SONARQUBE_URL}" \
+                   -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=${YOUR_PROJECT_KEY}" \
+                   -e SONAR_TOKEN="myAuthenticationToken" \
+                   -v "${YOUR_REPO}:/usr/src" \
+                    sonarsource/sonar-scanner-cli
+                '
+            }
+        }
         stage('Build Docker') {
             steps {
                 script {
