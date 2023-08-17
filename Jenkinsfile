@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-      docker {
-        image ' hiransanjeewa/docker-agent-with-sonar' // Use the image you built in step 1
-      }
-    }
+    agent any
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
