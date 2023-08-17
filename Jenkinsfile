@@ -34,6 +34,10 @@ pipeline {
             steps {
                 script {
                     echo 'Build Docker Image'
+                    sh '''
+                    pwd
+                    ls
+                    '''
                     customImage = docker.build("hiransanjeewa/django:${BUILD_NUMBER}", '.')
                 }
             }
