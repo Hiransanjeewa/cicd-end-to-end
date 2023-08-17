@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'younesehb/django-sonar'
+            image 'mattheusxs/python_sonar'
         }
     }
     
