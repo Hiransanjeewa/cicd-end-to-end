@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'siberianmushroomfarm/python-sonar-scanner'
+            image 'pradeepv30/jenkins-sonar-scanner'
         }
     }
     
