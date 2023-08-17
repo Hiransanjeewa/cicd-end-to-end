@@ -8,7 +8,7 @@ pipeline {
      //   GIT_TOKEN = 'Github-Token'
         GIT_PASSWORD= 'GIT_PASSWORD'
                  YOUR_PROJECT_KEY   ='jenkins'
-                 SONARQUBE_URL= 'http://34.170.25.117:9000'
+                 SONARQUBE_URL= '34.170.25.117:9000'
     }
 
     stages {
